@@ -8,13 +8,13 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { CacheMetricsDashboard } from './CacheMetricsDashboard';
 
 export function CacheDemo() {
   const [endpoint, setEndpoint] = useState('weather');
   const [loading, setLoading] = useState(false);
-  const [params, setParams] = useState({ city: 'New York' });
+  const [params, setParams] = useState<{ city?: string; symbol?: string }>({ city: 'New York' });
   const [bypassCache, setBypassCache] = useState(false);
   const [cacheType, setCacheType] = useState('dynamic');
   const [customTtl, setCustomTtl] = useState(300);
@@ -73,6 +73,16 @@ export function CacheDemo() {
     });
   };
 
+  // Update endpoint and initialize default params for that endpoint
+  const handleEndpointChange = (value: string) => {
+    setEndpoint(value);
+    if (value === 'weather') {
+      setParams({ city: 'New York' });
+    } else if (value === 'stocks') {
+      setParams({ symbol: 'AAPL' });
+    }
+  };
+
   return (
     <div className="container py-8">
       <h1 className="text-3xl font-bold mb-6">API Caching System Demo</h1>
@@ -94,7 +104,7 @@ export function CacheDemo() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="endpoint">Endpoint</Label>
-                  <Select value={endpoint} onValueChange={setEndpoint}>
+                  <Select value={endpoint} onValueChange={handleEndpointChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select endpoint" />
                     </SelectTrigger>
