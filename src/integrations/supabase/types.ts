@@ -91,6 +91,33 @@ export type Database = {
           },
         ]
       }
+      cache_metrics: {
+        Row: {
+          created_at: string
+          endpoint: string
+          hit: number
+          id: string
+          miss: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          endpoint: string
+          hit?: number
+          id?: string
+          miss?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          endpoint?: string
+          hit?: number
+          id?: string
+          miss?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       engagement_stats: {
         Row: {
           account_id: string | null
