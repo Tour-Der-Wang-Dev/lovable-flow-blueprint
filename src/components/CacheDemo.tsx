@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -49,14 +48,12 @@ export function CacheDemo() {
       // In a real implementation, X-Cache would come from the response headers
       setCacheStatus(bypassCache ? 'BYPASS' : (Math.random() > 0.5 && !bypassCache) ? 'HIT' : 'MISS');
       
-      toast({
-        title: "API Request Completed",
+      toast("API Request Completed", {
         description: `Fetched ${endpoint} data ${bypassCache ? 'bypassing cache' : 'with caching'}`,
       });
     } catch (error) {
       console.error('Error fetching data:', error);
-      toast({
-        title: "Error",
+      toast("Error", {
         description: `Failed to fetch data: ${error.message}`,
         variant: "destructive",
       });
@@ -67,8 +64,7 @@ export function CacheDemo() {
 
   const invalidateCache = async () => {
     // In a real implementation, this would call the edge function to invalidate the cache
-    toast({
-      title: "Cache Invalidated",
+    toast("Cache Invalidated", {
       description: `Cache for ${endpoint} has been cleared`,
     });
   };
