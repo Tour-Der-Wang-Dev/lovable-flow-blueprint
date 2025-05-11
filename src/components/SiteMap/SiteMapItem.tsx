@@ -5,6 +5,7 @@ import { ChevronRight, ChevronDown, Globe, Smartphone, Link2, FileText, Lock, Re
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { SiteMapItem as SiteMapItemType } from '@/types/siteMap';
+import { BreadcrumbNav } from '@/components/BreadcrumbNav';
 
 interface ItemProps {
   item: SiteMapItemType;
@@ -126,12 +127,7 @@ export const SiteMapItem: React.FC<ItemProps> = ({ item, level, isLast }) => {
                   <div className="mb-2">
                     <span className="font-medium text-gray-700">Breadcrumb:</span>
                     <div className="text-gray-600 ml-5">
-                      {item.breadcrumb.map((crumb, i) => (
-                        <React.Fragment key={i}>
-                          {i > 0 && <span className="mx-1">›</span>}
-                          <span>{crumb}</span>
-                        </React.Fragment>
-                      ))}
+                      <BreadcrumbNav breadcrumb={item.breadcrumb} />
                     </div>
                   </div>
                 )}
